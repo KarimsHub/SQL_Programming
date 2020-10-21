@@ -209,3 +209,81 @@ GROUP BY emp_id;
 SELECT SUM(total_sales), client_id
 FROM works_with
 GROUP BY client_id;
+
+
+## USING WILDCARDS
+## % = any number of characters, _ = one character
+
+# Find any clients who are an LLC (GmbH)
+SELECT *
+FROM client
+WHERE client_name LIKE '%LLC';  --> name has to end in LLC
+
+# Find any branch suppliers who are in the label business
+SELECT *
+FROM branch_supplier
+WHERE supplier_name LIKE '%Label%'; --> label is anythere inside the name
+
+# Find any employee born in october
+SELECT *
+FROM employee
+WHERE birth_date LIKE '%-10-%';
+
+other way:
+# Find any employee born in october
+SELECT *
+FROM employee
+WHERE birth_date LIKE '____-10%';
+
+# Find any clients who are schools
+SELECT *
+FROM client
+WHERE client_name LIKE '%school%';
+
+
+## UNION - combine result of mutiple select statements in one
+
+# Find a list of employee and branch names
+SELECT first_name
+FROM employee
+UNION
+SELECT branch_name
+FROM branch;
+
+# Find a list of all clients & branch suppliers names
+SELECT client_name, branch_id
+FROM client
+UNION
+SELECT supplier_name, branch_id
+FROM branch_supplier;
+
+# Find a list of all money spent or earned by the company 
+SELECT total_sales
+FROM works_with
+UNION
+SELECT salary
+FROM employee;
+
+
+## JOINS
+
+##INNER JOIN --> only the branch managers get included
+# Find all branches and the names of their managers
+SELECT employee.emp_id, employee.first_name, branch.branch_name
+FROM employee
+JOIN branch
+ON employee.emp_id = branch.mgr_id;
+
+##LEFT JOIN --> all of the employees get included because all of the rows of the left table (employee) get included but only the rows of the right table which match get included
+# Find all branches and the names of their managers
+SELECT employee.emp_id, employee.first_name, branch.branch_name
+FROM employee
+LEFT JOIN branch
+ON employee.emp_id = branch.mgr_id;
+
+##RIGHT JOIN --> all of the branches get included because all of the rows of the right table (branch) get included but only the rows of the left table which match get included
+# Find all branches and the names of their managers
+SELECT employee.emp_id, employee.first_name, branch.branch_name
+FROM employee
+RIGHT JOIN branch
+ON employee.emp_id = branch.mgr_id;
