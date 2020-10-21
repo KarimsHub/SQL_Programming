@@ -56,3 +56,4 @@ SELECT *
 FROM student
 WHERE name IN ('Eren', 'Brenner'); # getting all rows which equal the given names
 WHERE major <> 'Politics'; # not equal to Politics
+

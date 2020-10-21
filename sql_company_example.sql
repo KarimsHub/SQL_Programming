@@ -106,7 +106,7 @@ INSERT INTO branch_supplier VALUES(3, 'Uni-ball', 'Writing Utensils');
 INSERT INTO branch_supplier VALUES(3, 'Hammer Mill', 'Paper');
 INSERT INTO branch_supplier VALUES(3, 'Stamford Lables', 'Custom Forms');
 
-#updating client table
+# updating client table
 INSERT INTO client VALUES(400, 'Dunmore Highschool', 2);
 INSERT INTO client VALUES(401, 'Lackawana Country', 2);
 INSERT INTO client VALUES(402, 'FedEx', 3);
@@ -114,3 +114,98 @@ INSERT INTO client VALUES(403, 'John Daly Law, LLC', 3);
 INSERT INTO client VALUES(404, 'Scranton Whitepages', 2);
 INSERT INTO client VALUES(405, 'Times Newspaper', 3);
 INSERT INTO client VALUES(406, 'FedEx', 2);
+
+# updating works_with table
+INSERT INTO works_with VALUES(105, 400, 55000);
+INSERT INTO works_with VALUES(102, 401, 267000);
+INSERT INTO works_with VALUES(108, 402, 22500);
+INSERT INTO works_with VALUES(107, 403, 5000);
+INSERT INTO works_with VALUES(108, 403, 12000);
+INSERT INTO works_with VALUES(105, 404, 33000);
+INSERT INTO works_with VALUES(107, 405, 26000);
+INSERT INTO works_with VALUES(102, 406, 15000);
+INSERT INTO works_with VALUES(105, 406, 130000);
+
+
+## USEFUL QUERYS
+
+# Query to find all employee ordered by salary
+SELECT * 
+FROM employee
+ORDER BY salary;
+
+# Query to find all employee ordered by salary descending (absteigend)
+SELECT * 
+FROM employee
+ORDER BY salary DESC;
+
+# Query to find all employee ordered by sex and then name
+SELECT * 
+FROM employee
+ORDER BY sex, first_name, last_name;
+
+# Query to find the first 5 employees in the table
+SELECT * 
+FROM employee
+LIMIT 5;
+
+# Query to find the first and last name of all employees
+SELECT first_name, last_name
+FROM employee;
+
+# Query to find the forname and surname of all employees
+SELECT first_name AS forname, last_name AS surname
+FROM employee;
+
+# Find out all the different genders. Disctinct tells us the different values in a particular column
+SELECT DISTINCT sex
+FROM employee;
+
+
+
+## MORE ADVANCED QUERIES
+
+# Find the number of employees
+SELECT COUNT(emp_id)
+FROm employee;
+
+# Find the number of employees have supervisors
+SELECT COUNT(super_id)
+FROM employee;
+
+# Find the number of female employees born after 1970
+SELECT COUNT(sex)
+FROM employee
+WHERE sex = 'F' AND birth_date >= '1970-01-01';
+
+# Find the average of all employees salaries
+SELECT SUM(salary) / COUNT(salary)
+FROM employee;
+
+better way:
+SELECT AVG(salary)
+FROM employee;
+
+# Find the average of all male employees salaries
+SELECT AVG(salary)
+FROM employee
+WHERE sex = 'M';
+
+# Find the sum of all male employees salaries
+SELECT SUM(salary)
+FROM employee;
+
+# Find out how many males and females there are. Using Group by for aggregation
+SELECT COUNT(sex)
+FROM employee
+GROUP BY sex;
+
+# Find the total sales of each salesman
+SELECT SUM(total_sales), emp_id
+FROM works_with
+GROUP BY emp_id;
+
+# Find the number of money each client is spending 
+SELECT SUM(total_sales), client_id
+FROM works_with
+GROUP BY client_id;
