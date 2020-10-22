@@ -287,3 +287,34 @@ SELECT employee.emp_id, employee.first_name, branch.branch_name
 FROM employee
 RIGHT JOIN branch
 ON employee.emp_id = branch.mgr_id;
+
+
+## NESTED QUERIES
+
+# Find names of all employees who have sold over 30k to a single client
+
+SELECT employee.first_name, employee.last_name
+FROM employee
+WHERE employee.emp_id IN (
+    SELECT works_with.emp_id 
+    FROM works_with
+    WHERE works_with.total_sales > 29999
+);
+
+# Find all clients who are handled by the branch that Michael Scott manages
+
+SELECT client_name
+FROM client
+WHERE branch_id IN (
+    SELECT branch_id
+    FROM branch
+    WHERE mgr_id = 102
+);
+
+## ON DELETE
+
+DELETE FROM employee
+WHERE emp_id = 102;
+
+ON DELETE SETS NULL --> sets the value of the associated values in the other tables to NULL, mostly used when the foreign key is not the primary key
+ON DELETE CASCADE --> erases the whole row of associated values to the erased row, primary key can't be NULL so we have to use this if the associated values are primary keys
