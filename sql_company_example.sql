@@ -318,3 +318,12 @@ WHERE emp_id = 102;
 
 ON DELETE SETS NULL --> sets the value of the associated values in the other tables to NULL, mostly used when the foreign key is not the primary key
 ON DELETE CASCADE --> erases the whole row of associated values to the erased row, primary key can't be NULL so we have to use this if the associated values are primary keys
+
+##TRIGGER
+
+CREATE TRIGGER my_trigger BEFORE INSERT ON employee
+FOR EACH ROW INSERT INTO trigger_test VALUES('added new employee');
+
+INSERT INTO employee VALUES (109, 'Oscar', 'Martinez', '1986-02-19', 'M', 69000, 106, 3);
+
+SELECT * FROM trigger_test;
