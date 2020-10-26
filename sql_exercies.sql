@@ -72,3 +72,12 @@ INSERT INTO order_no (
 
 SELECT ord_date, salesman_id, ord_no, purch_amt
 FROM order_no;
+
+9. Write a query which will retrieve the value of salesman id of all salesmen, getting orders from the customers in orders table without any repeats. 
+SELECT DISTINCT salesman_id
+FROM order_no;
+
+10. Write a SQL statement to display all the information for those customers with a grade of 200.
+SELECT * 
+FROM customer
+WHERE grade = 200;
