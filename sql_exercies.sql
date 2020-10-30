@@ -96,3 +96,26 @@ WHERE year=1970;
 SELECT winner
 FROM nobel_win
 WHERE year = 1971 AND subject = 'Literature';
+
+14. Write a SQL query to display the year and subject that won 'Dennis Gabor' his prize.
+SELECT year, subject
+FROM nobel_win
+WHERE winner = 'Dennis Gabor';
+
+15. Write a SQL query to give the name of the 'Physics' winners since the year 1950.
+SELECT winner
+FROM nobel_win
+WHERE year >= 1950 AND subject = 'Physics';
+
+16. Write a SQL query to Show all the details (year, subject, winner, country ) of the Chemistry prize winners between the year 1965 to 1975 inclusive. 
+SELECT *
+FROM nobel_win
+WHERE subject = 'Chemistry' 
+AND year BETWEEN 1965 AND 1975;
+
+17. Write a SQL query to show all details of the Prime Ministerial winners after 1972 of Menachem Begin and Yitzhak Rabin.
+SELECT *
+FROM nobel_win
+WHERE category = 'Prime Minister' 
+AND year > 1972;
+
