@@ -119,3 +119,22 @@ FROM nobel_win
 WHERE category = 'Prime Minister' 
 AND year > 1972;
 
+18. Write a SQL query to show all the details of the winners with first name Louis.
+SELECT *
+FROM nobel_win
+WHERE winner LIKE 'Louis%';
+
+19. Write a SQL query to show all the winners in Physics for 1970 together with the winner of Economics for 1971. 
+SELECT *
+FROM nobel_win
+WHERE subject = 'Physics' AND year = 1970
+UNION 
+SELECT * 
+FROM nobel_win 
+WHERE subject = 'Economics' AND year = 1971;
+
+20. Write a SQL query to show all the winners of nobel prize in the year 1970 except the subject Physiology and Economics
+SELECT *
+FROM nobel_win 
+WHERE year=1970
+AND subject NOT IN('Physiology','Economics');
